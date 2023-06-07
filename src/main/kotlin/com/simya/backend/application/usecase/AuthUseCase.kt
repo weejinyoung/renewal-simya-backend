@@ -26,7 +26,7 @@ class AuthUseCase (
 
     @Transactional
     fun signUp(request: SignUpRequestDto) {
-        memberService.createMember(request.toEntity())
+        memberService.createMember(request.toEntity(passwordEncoder))
     }
 
 

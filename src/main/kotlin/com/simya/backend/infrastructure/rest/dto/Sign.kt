@@ -34,8 +34,12 @@ data class SignUpRequestDto (
     @Schema(description = "이름", defaultValue = "심야")
     val nickname: String
 ) {
-    fun toEntity(): Member =
-         Member(email, password, Role.ROLE_MEMBER)
+    fun toEntity(passwordEncoder: PasswordEncoder): Member =
+         Member(
+             email,
+             passwordEncoder.encode(password),
+             Role.ROLE_MEMBER
+         )
 
 }
 
