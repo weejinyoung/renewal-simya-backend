@@ -35,7 +35,9 @@ class JwtProvider(@Value("\${jwt.secret}") secretKey: String) {
         TokenDto(
             BEARER_TYPE,
             publishAccessToken(authentication.name, getAuthorities(authentication), Date(Date().time + ACCESS_TOKEN_EXPIRE_TIME)),
-            publishRefreshToken(Date(Date().time + REFRESH_TOKEN_EXPIRE_TIME)))
+            publishRefreshToken(Date(Date().time + REFRESH_TOKEN_EXPIRE_TIME)),
+            Date().time + REFRESH_TOKEN_EXPIRE_TIME
+        )
 
     fun publishAccessToken(email: String, authorities: String, expireTime: Date): String =
         Jwts.builder()
